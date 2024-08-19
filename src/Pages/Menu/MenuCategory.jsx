@@ -1,20 +1,26 @@
+import { Link } from "react-router-dom";
 import Cover from "../Shared/Cover";
 import MenuItem from "../Shared/MenuItem";
 
 const MenuCategory = ({items, title, coverImg}) => {
     return (
       <div className="p-10">
-        {title&&<Cover menuImg={coverImg} title={title}></Cover>}
+        {title && <Cover menuImg={coverImg} title={title}></Cover>}
         <div className="grid md:grid-cols-2 gap-10 my-16">
-                {
-                    // eslint-disable-next-line react/prop-types
-                    items.map((item) => <MenuItem key={item._id}
-                    item={item}
-                    ></MenuItem>)
-        }
+          {
+            // eslint-disable-next-line react/prop-types
+            items.map((item) => (
+              <MenuItem key={item._id} item={item}></MenuItem>
+            ))
+          }
         </div>
+        <Link to={`/order/${title}`}>
+          <button className="btn btn-outline border-0 border-b-4 mt-4">
+            Order Now
+          </button>
+        </Link>
       </div>
     );
 };
 
-export default MenuCategory;
+export default MenuCategory; 
