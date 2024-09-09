@@ -8,12 +8,13 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocailLogin from "./Shared/SocailLogin";
 
 const Login = () => {
  
   const [disable, setDisable] = useState(true);
 
-const {signIn}=useContext(AuthContext)
+const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || '/'
@@ -26,19 +27,18 @@ const {signIn}=useContext(AuthContext)
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signIn(email, password)
-      .then(result => {
-        const user = result.user
-        console.log(user);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Log in SuccessFully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate(from,{replace:true})
-    })
+    signInUser(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Log in SuccessFully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
+    });
   };
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
@@ -116,6 +116,7 @@ const {signIn}=useContext(AuthContext)
             <p>
               <small>New Here?</small>
               <Link to="/signUp">Create an account </Link>
+              <SocailLogin></SocailLogin>
             </p>
           </div>
         </div>

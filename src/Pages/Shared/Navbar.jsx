@@ -59,7 +59,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/dashboard/cart">
           <button className=" btn-ghost flex gap-2">
             <FaCartPlus />
 
